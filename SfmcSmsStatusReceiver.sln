@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SfmcSmsStatusReceiver", "SfmcSmsStatusReceiver\SfmcSmsStatusReceiver.csproj", "{BDE44118-23CA-4260-9551-A2EDE29E98B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfmcSmsStatusReceiver.Tests", "SfmcSmsStatusReceiver.Tests\SfmcSmsStatusReceiver.Tests.csproj", "{C825E551-4EE8-4DC3-AD19-A60BE5308D32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDE44118-23CA-4260-9551-A2EDE29E98B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDE44118-23CA-4260-9551-A2EDE29E98B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDE44118-23CA-4260-9551-A2EDE29E98B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDE44118-23CA-4260-9551-A2EDE29E98B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C825E551-4EE8-4DC3-AD19-A60BE5308D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C825E551-4EE8-4DC3-AD19-A60BE5308D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C825E551-4EE8-4DC3-AD19-A60BE5308D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C825E551-4EE8-4DC3-AD19-A60BE5308D32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0277A5BA-92EF-441F-B04B-6EAAD420DDF9}
+	EndGlobalSection
+EndGlobal
