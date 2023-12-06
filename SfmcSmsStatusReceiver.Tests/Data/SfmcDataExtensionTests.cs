@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using SfmcSmsStatusReceiver.Data;
+﻿using SfmcSmsStatusReceiver.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SfmcSmsStatusReceiver.Tests.Data
@@ -32,7 +32,7 @@ namespace SfmcSmsStatusReceiver.Tests.Data
             });
 
             var payloadJson = await payload.ReadAsStringAsync();
-            var queueMsg = JsonConvert.DeserializeObject<QueueMessage>(payloadJson);
+            var queueMsg = JsonSerializer.Deserialize<QueueMessage>(payloadJson);
 
             //act
             var dataExt = new SfmcDataExtension(queueMsg);
@@ -60,11 +60,11 @@ namespace SfmcSmsStatusReceiver.Tests.Data
             });
 
             var payloadJson = await payload.ReadAsStringAsync();
-            var queueMsg = JsonConvert.DeserializeObject<QueueMessage>(payloadJson);
+            var queueMsg = JsonSerializer.Deserialize<QueueMessage>(payloadJson);
 
             //act
             var dataExt = new SfmcDataExtension(queueMsg);
-            var jsonResult = JsonConvert.SerializeObject(dataExt);
+            var jsonResult = JsonSerializer.Serialize<SfmcDataExtension>(dataExt);
 
             //assert
             Assert.IsTrue(jsonResult.Contains("twilioeventid", StringComparison.CurrentCulture), "JSON from DataExtension expecting 'twilioeventid'");

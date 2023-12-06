@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SfmcSmsStatusReceiver.Data
@@ -41,17 +41,17 @@ namespace SfmcSmsStatusReceiver.Data
             return true;
         }
 
-        [JsonProperty("keys")]
+        [JsonPropertyName("keys")]
         public SfmcDataExtensionKey Key { get; set; }
 
-        [JsonProperty("values")]
+        [JsonPropertyName("values")]
         public SfmcDataExtensionValues Values { get; set; }
     }
 
     public class SfmcDataExtensionKey
     {
         private string mobilePhone;
-        [JsonProperty("mobilephone")]
+        [JsonPropertyName("mobilephone")]
         public string MobilePhone {
             get { return mobilePhone; }
             set { 
@@ -71,19 +71,19 @@ namespace SfmcSmsStatusReceiver.Data
         //[JsonProperty("mobilephone")]
         //public string MobilePhone { get; set; }
 
-        [JsonProperty("fromphone")]
+        [JsonPropertyName("fromphone")]
         public string FromPhone { get; set; }
 
-        [JsonProperty("message")]
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
-        [JsonProperty("trackingid")]
+        [JsonPropertyName("trackingid")]
         public string TrackingID { get;set; }
 
-        [JsonProperty("deliverystatus")]
+        [JsonPropertyName("deliverystatus")]
         public string DeliveryStatus { get; set; }
 
-        [JsonProperty("twilioeventid")]
+        [JsonPropertyName("twilioeventid")]
         public string EventId { get; set; }
     }
 }

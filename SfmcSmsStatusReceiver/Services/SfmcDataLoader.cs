@@ -38,6 +38,9 @@ namespace SfmcSmsStatusReceiver.Services
             request.Content = JsonContent.Create<SfmcDataExtension>(data);
             _log.LogInformation($"{data.Values.TrackingID} - issuing upsert request");
 
+            var json = await request.Content.ReadAsStringAsync();
+            _log.LogInformation($"json: \n{json}");
+
             var result = await http.SendAsync(request);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {

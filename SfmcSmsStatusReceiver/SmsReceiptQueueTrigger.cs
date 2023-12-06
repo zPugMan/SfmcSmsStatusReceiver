@@ -1,10 +1,10 @@
 using System;
 using System.Text;
+using System.Text.Json;
 using Azure.Messaging.ServiceBus;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Extensions.ServiceBus;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using SfmcSmsStatusReceiver;
 using SfmcSmsStatusReceiver.Data;
 using SfmcSmsStatusReceiver.Services;
@@ -52,7 +52,7 @@ namespace Solvenna.Function
                     return false;
                 }
 
-                var received = JsonConvert.DeserializeObject<QueueMessage>(Encoding.UTF8.GetString(msg.Body));
+                var received = JsonSerializer.Deserialize<QueueMessage>(Encoding.UTF8.GetString(msg.Body));
                 var sendReq = new SfmcDataExtension(received);
 
                 if(!sendReq.IsValidForUpload())

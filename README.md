@@ -19,3 +19,21 @@ To run the function locally in VSCode
 * Set `local.settings.json` per your individual settings
 * Change directory to the `SfmcSmsStatusReceiver` project folder versus the root solution folder
 * Execute: `func start`
+
+Example `local.settings.json` file:
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "receipt_SERVICEBUS": "Endpoint=sb://**********.servicebus.windows.net/;SharedAccessKeyName=ListenReceipt;SharedAccessKey=**********************;EntityPath=*********",
+    "receipt_QUEUE": "********",
+    "sfmcAuth": "https://***********.auth.marketingcloudapis.com/v2/token",
+    "sfmcAuthClientId": "",
+    "sfmcAuthClientSecret": "",
+    "sfmcDataExtensionExtKey": "",
+    "sfmcDataExtensionPKey": ""
+  }
+}
+```
