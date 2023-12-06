@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SfmcSmsStatusReceiver.Data
 {
-    public class SfmcDataExtension
+    public class SfmcDataExtension : IDataObject
     {
         public SfmcDataExtension() { }
 
@@ -24,7 +24,6 @@ namespace SfmcSmsStatusReceiver.Data
             Key = new SfmcDataExtensionKey() { MobilePhone = data.ToPhone };
             Values = new SfmcDataExtensionValues()
             {
-                MobilePhone = data.ToPhone,
                 FromPhone = data.FromPhone,
                 Message = String.Empty,
                 TrackingID = data.TrackingId,
@@ -51,14 +50,26 @@ namespace SfmcSmsStatusReceiver.Data
 
     public class SfmcDataExtensionKey
     {
+        private string mobilePhone;
         [JsonProperty("mobilephone")]
-        public string MobilePhone { get; set; }
+        public string MobilePhone {
+            get { return mobilePhone; }
+            set { 
+                if (!string.IsNullOrEmpty(value) && value[0] == '+')
+                {
+                    mobilePhone = value.Substring(1);
+                } else
+                {
+                    mobilePhone = value;
+                }
+            } 
+        }
     }
 
     public class SfmcDataExtensionValues
     {
-        [JsonProperty("mobilephone")]
-        public string MobilePhone { get; set; }
+        //[JsonProperty("mobilephone")]
+        //public string MobilePhone { get; set; }
 
         [JsonProperty("fromphone")]
         public string FromPhone { get; set; }

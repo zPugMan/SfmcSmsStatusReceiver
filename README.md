@@ -12,3 +12,10 @@ The following environment settings are expected to be defined.
 |sfmcAuthClientSecret|Yes|SFMC issued client_secret|
 |sfmcDataExtensionKey|Yes|SFMC assigned external key for the data extension|
 |sfmcDataExtensionPKey|Yes|Primary key defined for the data extension|
+
+# Getting Started
+To run the function locally in VSCode
+* Open repo in VSCode
+* Set `local.settings.json` per your individual settings
+* Change directory to the `SfmcSmsStatusReceiver` project folder versus the root solution folder
+* Execute: `func start`

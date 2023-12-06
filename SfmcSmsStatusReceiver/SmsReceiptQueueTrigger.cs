@@ -22,7 +22,10 @@ namespace Solvenna.Function
             _log = logger;
             _sfmcAuth = sfmcAuth;
             _httpFactory = httpClientFactory;
+
         }
+
+        public IDataLoader DataLoader { get; set; }
 
         [Function(nameof(SmsReceiptQueueTrigger))]
         public async Task<bool> Run(
@@ -59,8 +62,12 @@ namespace Solvenna.Function
                     return false;
                 }
 
-                var loader = new SfmcDataLoader(_log, _httpFactory);
-                var result = await loader.UpsertDataAsync(_sfmcAuth, sendReq);
+                if (DataLoader == null)
+                {
+                    DataLoader = new SfmcDataLoader(_log, _httpFactory);
+                }
+
+                var result = await DataLoader.UpsertDataAsync(_sfmcAuth, sendReq);
 
                 await messageActions.CompleteMessageAsync(msg);
                 return result;
