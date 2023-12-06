@@ -1,13 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SfmcSmsStatusReceiver.Data
 {
-    public class SfmcDataExtension
+    public class SfmcDataExtension : IDataObject
     {
         public SfmcDataExtension() { }
 
@@ -24,7 +24,6 @@ namespace SfmcSmsStatusReceiver.Data
             Key = new SfmcDataExtensionKey() { MobilePhone = data.ToPhone };
             Values = new SfmcDataExtensionValues()
             {
-                MobilePhone = data.ToPhone,
                 FromPhone = data.FromPhone,
                 Message = String.Empty,
                 TrackingID = data.TrackingId,
@@ -42,37 +41,49 @@ namespace SfmcSmsStatusReceiver.Data
             return true;
         }
 
-        [JsonProperty("keys")]
+        [JsonPropertyName("keys")]
         public SfmcDataExtensionKey Key { get; set; }
 
-        [JsonProperty("values")]
+        [JsonPropertyName("values")]
         public SfmcDataExtensionValues Values { get; set; }
     }
 
     public class SfmcDataExtensionKey
     {
-        [JsonProperty("mobilephone")]
-        public string MobilePhone { get; set; }
+        private string mobilePhone;
+        [JsonPropertyName("mobilephone")]
+        public string MobilePhone {
+            get { return mobilePhone; }
+            set { 
+                if (!string.IsNullOrEmpty(value) && value[0] == '+')
+                {
+                    mobilePhone = value.Substring(1);
+                } else
+                {
+                    mobilePhone = value;
+                }
+            } 
+        }
     }
 
     public class SfmcDataExtensionValues
     {
-        [JsonProperty("mobilephone")]
-        public string MobilePhone { get; set; }
+        //[JsonProperty("mobilephone")]
+        //public string MobilePhone { get; set; }
 
-        [JsonProperty("fromphone")]
+        [JsonPropertyName("fromphone")]
         public string FromPhone { get; set; }
 
-        [JsonProperty("message")]
+        [JsonPropertyName("message")]
         public string Message { get; set; }
 
-        [JsonProperty("trackingid")]
+        [JsonPropertyName("trackingid")]
         public string TrackingID { get;set; }
 
-        [JsonProperty("deliverystatus")]
+        [JsonPropertyName("deliverystatus")]
         public string DeliveryStatus { get; set; }
 
-        [JsonProperty("twilioeventid")]
+        [JsonPropertyName("twilioeventid")]
         public string EventId { get; set; }
     }
 }

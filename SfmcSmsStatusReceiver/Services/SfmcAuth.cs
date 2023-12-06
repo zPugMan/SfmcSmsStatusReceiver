@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using SfmcSmsStatusReceiver;
 using SfmcSmsStatusReceiver.Utils;
 using System.Net.Http.Json;
-using Newtonsoft.Json;
 using SfmcSmsStatusReceiver.Data;
+using System.Text.Json;
 
 namespace SfmcSmsStatusReceiver.Services
 {
@@ -88,8 +88,8 @@ namespace SfmcSmsStatusReceiver.Services
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 _log.LogInformation($"Authorization received ({result.StatusCode})");
-                var body = result.Content.ReadAsStringAsync().Result;
-                var authResponse = JsonConvert.DeserializeObject<SfmcAuthResponse>(body);
+                var body = await result.Content.ReadAsStringAsync();
+                var authResponse = JsonSerializer.Deserialize<SfmcAuthResponse>(body);
 
                 if (authResponse == null)
                     return false;

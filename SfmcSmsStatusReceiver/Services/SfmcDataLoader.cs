@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SfmcSmsStatusReceiver.Services
 {
-    public class SfmcDataLoader
+    public class SfmcDataLoader : IDataLoader
     {
         private readonly ILogger<FunctionLog> _log;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -35,8 +35,11 @@ namespace SfmcSmsStatusReceiver.Services
             };
             
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authCache.AuthToken);
-            request.Content = JsonContent.Create(data);
+            request.Content = JsonContent.Create<SfmcDataExtension>(data);
             _log.LogInformation($"{data.Values.TrackingID} - issuing upsert request");
+
+            var json = await request.Content.ReadAsStringAsync();
+            _log.LogInformation($"json: \n{json}");
 
             var result = await http.SendAsync(request);
             if (result.StatusCode == System.Net.HttpStatusCode.OK)
